@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ToDone</string>
+    <string name="new_list_title">New List Title</string>
+    <string name="add_list">Add List</string>
+    <string name="new_sublist_item">New Sublist Item</string>
+    <string name="add">Add</string>
 </resources>
+
