@@ -5,25 +5,19 @@ import androidx.room.PrimaryKey
 import androidx.room.ForeignKey
 import androidx.room.ColumnInfo
 
-@Entity(tableName = "todo_lists")
-data class TodoListEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    @ColumnInfo(name = "title") val title: String
-)
-
 @Entity(
-    tableName = "todo_items",
+    tableName = "todo_lists",
     foreignKeys = [
         ForeignKey(
             entity = TodoListEntity::class,
             parentColumns = ["id"],
-            childColumns = ["list_id"],
+            childColumns = ["parent_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class TodoItemEntity(
+data class TodoListEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "list_id", index = true) val listId: Long
+    @ColumnInfo(name = "parent_id", index = true) val parentId: Long? = null // For sub-lists
 )

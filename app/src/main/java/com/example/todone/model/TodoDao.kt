@@ -12,17 +12,15 @@ interface TodoDao {
     @Query("SELECT * FROM todo_lists")
     fun getAllLists(): Flow<List<TodoListEntity>>
 
+    // Get root lists (no parent)
+    @Query("SELECT * FROM todo_lists WHERE parent_id IS NULL")
+    fun getRootLists(): Flow<List<TodoListEntity>>
+
+    // Get sub-lists for a parent list
+    @Query("SELECT * FROM todo_lists WHERE parent_id = :parentId")
+    fun getSubLists(parentId: Long): Flow<List<TodoListEntity>>
+
     @Delete
     suspend fun deleteList(list: TodoListEntity)
-
-    // TodoItem operations
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertItem(item: TodoItemEntity): Long
-
-    @Query("SELECT * FROM todo_items WHERE list_id = :listId")
-    fun getItemsForList(listId: Long): Flow<List<TodoItemEntity>>
-
-    @Delete
-    suspend fun deleteItem(item: TodoItemEntity)
 }
 
