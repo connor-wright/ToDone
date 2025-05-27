@@ -75,5 +75,8 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    //UI
+    implementation(libs.fluentUI)
 }
 
